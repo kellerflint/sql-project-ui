@@ -1,9 +1,12 @@
-import { db } from "@/lib/db";
-import { redirect } from "next/navigation";
 
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs";
-import { IconBadge } from "@/components/icon-badge";
 import { LayoutDashboard } from "lucide-react";
+
+import { db } from "@/lib/db";
+import { IconBadge } from "@/components/icon-badge";
+
+import { TitleForm } from "./_components/title-form";
 
 const CourseIdPage = async ({
     params
@@ -58,6 +61,10 @@ const completedText = `(${completedFields} / ${totalFields})`
 
                     </h2>
                 </div>
+                <TitleForm 
+                    initialData={course}
+                    courseId={course.id}
+                />
             </div>
 
         </div>
