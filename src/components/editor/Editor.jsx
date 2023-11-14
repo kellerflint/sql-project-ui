@@ -17,11 +17,13 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Typography from '@mui/material/Typography';
 
+import { Question } from 'components';
+
 // ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.6/src-noconflict');
 
 const HeroContainer = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 3fr;
+	grid-template-columns: 1fr 3fr 1fr;
 
 	@media (max-width: 700px) {
 		display: flex;
@@ -29,7 +31,7 @@ const HeroContainer = styled.div`
 	}
 `;
 
-const Editor = ({ value, setValue, history }) => {
+const Editor = ({ value, setValue, history, setHistory, setExpectedResult, setActualResult }) => {
 	const onChange = (newValue) => {
 		setValue(newValue);
 	};
@@ -97,6 +99,13 @@ const Editor = ({ value, setValue, history }) => {
 					/>
 				</label>
 			</div>
+			<Question
+				query={value}
+				history={history}
+				setHistory={setHistory}
+				setExpectedResult={setExpectedResult}
+				setActualResult={setActualResult}
+			/>
 		</HeroContainer>
 	);
 };

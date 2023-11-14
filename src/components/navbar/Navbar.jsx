@@ -119,14 +119,14 @@ function Navbar({ query, setQuery, value, setValue, history, setHistory }) {
 							</Typography>
 						</>
 					)}
-					<Button onClick={onSubmit} color="inherit">
+					{/* <Button onClick={onSubmit} color="inherit">
 						<PlayCircle sx={{ marginRight: '5px' }} />
 						Run Query
 					</Button>
 					<Button onClick={toggleDrawer('right', true)} color="inherit">
 						<TableChart sx={{ marginRight: '5px' }} />
 						Available Tables
-					</Button>
+					</Button> */}
 
 					{/* Display table fields */}
 					<Backdrop
