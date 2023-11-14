@@ -8,6 +8,7 @@ import { Pencil } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+
 import {
     Form,
     FormControl,
@@ -15,26 +16,27 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
 
-
-interface TitleFormProps {
+interface DescriptionFormProps {
     initialData: {
-        title: string;
+        description: string;
     };
     courseId: string;
 };
 
 const formSchema = z.object({
-    title: z.string().min(1, {
-        message: "Title is reqired",
-    })
+    description: z.string().min(1, {
+        message: "Description is required",
+    }),
 });
-export const TitleForm = ({
+
+export const DescriptionForm = ({
     initialData,
     courseId
-}: TitleFormProps) => {
+}: DescriptionFormProps) => {
     const[isEditing, setIsEditing] = useState(false);
 
     const toggleEdit = () => setIsEditing((current) => !current);
@@ -62,21 +64,24 @@ export const TitleForm = ({
     return (
         <div  className ="mt-6 border bg-slacey-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                    Course title
+                    Course description 
                     <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? (
                         <>Cancel</>
                     ) : (
                         <>
                             <Pencil className="h-4 w-4 mr-2" />
-                            Edit title
+                            Edit description
                         </>
                     )}
              </Button>
             </div>
             {!isEditing && (
-                <p className="text-sm mt-2">
-                    {initialData.title}
+                <p className={cn(
+                    "text-sm mt-2",
+                    !initialData.description && "text-slate-500 italic"
+                )}>
+                    {initialData.description || "No description"}
                 </p>
             )}
             {isEditing && (
@@ -87,13 +92,13 @@ export const TitleForm = ({
                     >
                         <FormField
                         control={form.control}
-                        name="title"
+                        name="description"
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <Input 
+                                    <Textarea
                                         disabled={isSubmitting}
-                                        placeholder="e.g 'Advanced web development'"
+                                        placeholder="e.g 'This course is about...'"
                                         {...field}
                                      />
                                 </FormControl>
