@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Courses from './Pages/Courses';
 import Assignment from './Pages/Assigment';
 import LoginSignup from './Pages/LoginSignup';
+import SqlEditor from './Pages/SqlEditor';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
               {/*<Route path='../questions' element={<questions/>}/>
               <Route path='questionId' element={<questions/>}/>*/}
           </Route>
-          <Route path='/sql-editor' element={<sql-editor/>}/>
+          <Route path='/sql-editor' element={<SqlEditor/>}/>
           <Route path='/login' element={<LoginSignup/>}/>
         </Routes>
         {/*<Footer/>*/}
