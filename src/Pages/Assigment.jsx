@@ -1,77 +1,90 @@
 import React, { useState } from "react";
-import { Button } from "antd";
 
 import './CSS/Assignment.css'
 
-import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-sql";
-import "ace-builds/src-noconflict/theme-github";
+import Back from "../Components/common/back/Back";
+
+import { API_HOSTNAME } from "../Hooks/useApiRequest";
+import { Link } from "react-router-dom";
+
+const AssignmentList = ({ items }) => {
+  return <>
+    <div className="grid2">
+      {items}
+    </div>
+  </>;
+}
+
+function formatDate(sqlDate) {
+  // 1905-06-06T00:00:00.000Z
+  let year = sqlDate.substring(0, 4);
+  let month = sqlDate.substring(5, 7);
+  let day = sqlDate.substring(8, 10);
+
+  let date = new Date(year, month - 1, day);
+  return date.toDateString();
+}
 
 const Assignment = () => {
-  const [code, setCode] = useState("");
-  const [show,setShow]=useState("");
+  const [assignments, setAssignments] = useState(null);
+  const [currentAssignment, setCurrentAssignment] = useState(null);
 
-  const handleCodeChange = (value) => {
-    setCode(value);
-  };
+  if (currentAssignment === null) {
+    let items = [];
 
-  const handleRunCode = () => {
-    setShow("")
-    // Handle the execution of the SQL code here
-    console.log("Executing SQL code:", code);
-  };
-  const handleShowCode = () => {
-    setShow(code)
-    // Handle the execution of the SQL code here
-    console.log("Executing SQL code:", code);
-  };
+    if (assignments === null) {
+      fetch(`${API_HOSTNAME}/assignments`, { method: 'GET' }).then((res) => {
+          res.json().then(data => {
+            setAssignments(data);
+          });
+      });
+    } else {
+      items = assignments.map(a =>
+        <div className="assignment">
+          <div className="assignment_title">{a.title}</div>
+          <div className="assignment_details">
+            <div>{a.questions} questions</div>
+            <div>{a.points} points</div>
+            <div>Due date: {formatDate(a.due_date)}</div>
+          </div>
+          <button onClick={() => { setCurrentAssignment(a) }} className="assignment_start primary-btn">Start</button>
+        </div>
+      );
+    }
 
-
-  return (
-    <div className="practice_container">
-      <h2>Class: SDEV 201</h2>
-      <div className="question">
-        <ul>
-          <li>
-            {" "}
-            Assignment 1
-          </li>
-          <li>
-            {" "}
-            Assignment 2
-          </li>
-          <li>
-            {" "}
-            Assignment 3
-          </li>
-        </ul>
-      </div>
-      <div className="answer">
-        <AceEditor
-          mode="sql"
-          theme="github"
-          onChange={handleCodeChange}
-          name="sql-editor"
-          value={code}
-          editorProps={{ $blockScrolling: true }}
-          setOptions={{ useWorker: false }}
-          style={{ width: "100%", height: "400px" }}
-        />
-        <Button type="primary" onClick={handleRunCode}>
-          Run SQL Code
-        </Button>
-        <Button type="primary"  style={{ marginLeft: '100px' }} onClick={handleShowCode}>
-          Show answer
-        </Button>
-        <br />
-        <input
-          type="text"
-          value={show}
-          style={{ width: "100%", height: "200px", marginTop: "20px" }} // Thiết lập chiều rộng là 300px và chiều cao là 50px
-        />
-      </div>
-    </div>
-  );
+    return (
+      <>
+        <Back title="Assignments" />
+        <div className="assignment_container">
+          <h2>Class: SDEV 201</h2>
+          <h3>Assignments</h3>
+          <AssignmentList items={items}/>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Back title="Assignments" />
+        <div className="assignment_container">
+          <h2>Class: SDEV 201</h2>
+          <div className="question">
+            <h3>{currentAssignment.title}</h3>
+            <div className="assignment_description">
+              <div>{currentAssignment.questions} questions</div>
+              <div>{currentAssignment.points} points</div>
+              <div>Due date: {formatDate(currentAssignment.due_date)}</div>
+              <p>Assignment description here</p>
+            </div>
+            <Link to="/sql-editor">
+              <button className='primary-btn'>Start / Resume</button>
+            </Link>
+            <button onClick={() => { setCurrentAssignment(null) }}>Go Back</button>
+          </div>
+        </div>
+      </>
+    );
+  }
 };
 
 export default Assignment;

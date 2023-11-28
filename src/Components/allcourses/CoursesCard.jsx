@@ -1,6 +1,7 @@
 import React from "react"
 import "./courses.css"
 import { coursesCard } from "../../dummydata"
+import { Link } from "react-router-dom"
 
 const CoursesCard = () => {
   return (
@@ -41,7 +42,9 @@ const CoursesCard = () => {
                   </div>
                 </div>
               </div>
-              <button className='outline-btn'>START NOW !</button>
+              <Link to='/assignment'>
+                <button className='outline-btn'>START NOW !</button>
+              </Link>
             </div>
           ))}
         </div>

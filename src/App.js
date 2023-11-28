@@ -15,13 +15,13 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/courses' component={CourseHome} />
-          <Route exact path='/sql-editor' component={SqlEditor} />
-          <Route exact path='/assignment' component={Assignment} />
-          <Route exact path='/login' component={LoginSignup} />
-          <Route exact path='/contact' component={Contact} />
+          <Route exact path='/' element={<Home/>} />
+          <Route exact path='/about' element={<About/>} />
+          <Route exact path='/courses' element={<CourseHome/>} />
+          <Route exact path='/sql-editor' element={<SqlEditor/>} />
+          <Route exact path='/assignment' element={<Assignment/>} />
+          <Route exact path='/login' element={<LoginSignup/>} />
+          <Route exact path='/contact' element={<Contact/>} />
           </Routes>
         <Footer />
       </BrowserRouter>

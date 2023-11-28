@@ -17,13 +17,11 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Typography from '@mui/material/Typography';
 
-import Question from '../question/Question';
-
 // ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.6/src-noconflict');
 
 const HeroContainer = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 3fr 1fr;
+	grid-template-columns: 1fr 3fr;
 
 	@media (max-width: 700px) {
 		display: flex;
@@ -41,7 +39,7 @@ const Editor = ({ value, setValue, history, setHistory, setExpectedResult, setAc
 			<Container
 				sx={{
 					background: '#272822',
-					maxHeight: '440px',
+					maxHeight: '380px', // This is the height of the AceEditor component
 					overflowY: 'scroll',
 					overflowX: 'hidden',
 					'&::-webkit-scrollbar': { display: 'none' },
@@ -99,13 +97,6 @@ const Editor = ({ value, setValue, history, setHistory, setExpectedResult, setAc
 					/>
 				</label>
 			</div>
-			<Question
-				query={value}
-				history={history}
-				setHistory={setHistory}
-				setExpectedResult={setExpectedResult}
-				setActualResult={setActualResult}
-			/>
 		</HeroContainer>
 	);
 };

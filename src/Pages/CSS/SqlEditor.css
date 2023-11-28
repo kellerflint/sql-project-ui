@@ -1,0 +1,16 @@
+.results-table {
+    padding: 4px 48px;   
+}
+
+.results-table thead td {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.results-table tbody tr:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.results-table td {
+    padding: 0 8px;
+}

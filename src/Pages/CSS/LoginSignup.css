@@ -1,19 +1,18 @@
 .loginsignup{
     width: 100%;
-    height: 80vh;
-    background: #fce3fe;
+    background: transparent;
     padding-top: 100px;
 
 }
 .loginsignup-container{
     width: 580px;
-    height: 600px;
     background: white;
     margin: auto;
     padding: 40px 60px;
 }
 .loginsignup-container h1{
     margin: 20px 0px;
+    text-align: center;
 }
 
 .loginsignup-fields{
@@ -32,7 +31,7 @@
     font-size: 18px;
 }
 .loginsignup-container button{
-    width: 580px;
+    width: 100%;
     height: 72px;
     color: white;
     background: #ff4141;

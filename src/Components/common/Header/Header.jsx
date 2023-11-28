@@ -22,7 +22,7 @@ const Header = () => {
               <Link to='/about'>About</Link>
             </li>
              <li>
-              <Link to='/sqleditor'>SQL Editor</Link>
+              <Link to='/sql-editor'>SQL Editor</Link>
             </li>
             <li>
               <Link to='/contact'>Contact</Link>
@@ -30,8 +30,9 @@ const Header = () => {
           </ul>
           
           <div className='start'>
-          <Link to='/login'></Link>
-            <div className='button'>SIGN UP</div>
+            <Link to='/login'>
+              SIGN UP
+            </Link>
           </div>
           <button className='toggle' onClick={() => setClick(!click)}>
             {click ? <i className='fa fa-times'> </i> : <i className='fa fa-bars'></i>}

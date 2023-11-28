@@ -3,6 +3,8 @@ import './CSS/LoginSignup.css'
 
 const LoginSignup = () => {
     return (
+        <>
+        <div className='back'></div>
         <div className='loginsignup'>
             <div className="loginsignup-container">
                 <h1>Sign Up</h1>
@@ -21,6 +23,7 @@ const LoginSignup = () => {
             </div>
 
         </div>
+        </>
     )
 }
 
