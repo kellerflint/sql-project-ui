@@ -1,32 +1,32 @@
-
-import './App.css';
-import Navbar from './Components/Navbar/Navbar';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-//import Footer from './Components/Footer/Footer'
-import Courses from './Pages/Courses';
+import "./App.css"
+import Header from "./Components/common/Header/Header"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import About from "./Components/About/About"
+import CourseHome from "./Components/allcourses/CourseHome"
 import Assignment from './Pages/Assigment';
 import LoginSignup from './Pages/LoginSignup';
 import SqlEditor from './Pages/SqlEditor';
-
+import Contact from "./Components/common/contact/Contact"
+import Footer from "./Components/common/Footer/Footer"
+import Home from "./Components/Home/Home"
 function App() {
   return (
-    <div className="App">
+    <>
       <BrowserRouter>
-        <Navbar/>
+        <Header />
         <Routes>
-          <Route path='/' element={<Courses/>}/>
-          <Route path='/assignment' element={<Assignment/>}>
-              <Route path=':assignmentId' element={<Assignment/>}/>
-              {/*<Route path='../questions' element={<questions/>}/>
-              <Route path='questionId' element={<questions/>}/>*/}
-          </Route>
-          <Route path='/sql-editor' element={<SqlEditor/>}/>
-          <Route path='/login' element={<LoginSignup/>}/>
-        </Routes>
-        {/*<Footer/>*/}
-        </BrowserRouter>
-      </div>
-  );
+          <Route exact path='/' component={Home} />
+          <Route exact path='/about' component={About} />
+          <Route exact path='/courses' component={CourseHome} />
+          <Route exact path='/sql-editor' component={SqlEditor} />
+          <Route exact path='/assignment' component={Assignment} />
+          <Route exact path='/login' component={LoginSignup} />
+          <Route exact path='/contact' component={Contact} />
+          </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
+  )
 }
 
-export default App;
+export default App
