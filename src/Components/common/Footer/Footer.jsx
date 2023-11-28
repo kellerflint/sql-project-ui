@@ -7,7 +7,7 @@ const Footer = () => {
      <footer>
         <div className='container padding'>
           <div className='box logo'>
-            <h1>ACADEMIA</h1>
+            <h1>SQLEA</h1>
             <span>ONLINE EDUCATION & LEARNING</span>
             <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 

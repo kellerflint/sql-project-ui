@@ -119,7 +119,7 @@ export const homeAbout = [
       courTeacher: [
         {
           dcover: "./images/back.webp",
-          name: "by Petter",
+          name: "by Josh",
           totalTime: "50 lectures (50 hrs)",
         },
       ],

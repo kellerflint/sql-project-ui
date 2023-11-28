@@ -6,7 +6,7 @@ import './Header.css'
         <section className='head'>
             <div className='container flexSB'>
                 <div className='logo'>
-                    <h1>SQLELIA</h1>
+                    <h1>SQLEA</h1>
                     <span>ONLINE EDUCATION & LEARNING</span>
                 </div>
                 <div className="social">
