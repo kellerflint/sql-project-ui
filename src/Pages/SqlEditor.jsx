@@ -6,11 +6,11 @@ import Loader from '@mui/material/LinearProgress';
 
 import { sendGetRequest, sendPostRequest, API_HOSTNAME } from '../Hooks/useApiRequest';
 
-import { Container, Typography, Button } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 
 import './CSS/SqlEditor.css';
 
-function Question({ query, question, setQuestion, history, setHistory, setExpectedResult, setActualResult, result, setResult }) {
+function Question({ question, setQuestion, history, setHistory, setExpectedResult, setActualResult, result, setResult }) {
 	
 	
 
@@ -22,9 +22,6 @@ function Question({ query, question, setQuestion, history, setHistory, setExpect
 			setActualResult("");
 			setResult("");
 		});
-	}
-	function loadNextQuestion() {
-		loadQuestion(question.id + 1);
 	}
 
 	if (question === null) {
@@ -56,28 +53,38 @@ function Question({ query, question, setQuestion, history, setHistory, setExpect
 }
 
 
-function formatQueryResults(results) {
-	if (typeof results === 'string') return results;
-	else if (!('length' in results) || results.length === 0) return "";
+function ResultTable({ results }) {
+	if (typeof results !== 'object') return <div>{results}</div>;
+	else if (!('length' in results) || results.length === 0) return <div></div>;
 
-	if (results[0] instanceof Array) {
-		return "Please do not enter more than one SELECT query";
+	// If the user enters multiple queries, the backend will return an array of results.
+	// SELECT statements return arrays of rows, but others (e.g. CREATE TABLE) may return numbers.
+	for (let element of results) {
+		if (element instanceof Array) {
+			// If the results array contains subarrays, display each element as a separate result.
+
+			const returnValue = [];
+			for (let currentElement of results) {
+				returnValue.push(<ResultTable results={currentElement}/>);
+			}
+
+			return returnValue;
+		}
 	}
 
-	let columns = [];
+	const columns = [];
 	for (let key in results[0]) columns.push(key);
 
-	let width = `${100 / columns.length}%`;
+	const width = `${100 / columns.length}%`;
 
-	let columnTh = []
-	for (let val of columns) columnTh.push(<td style={{width: width}}>{val}</td>)
+	let columnTh = [];
+	for (let val of columns) columnTh.push(<td style={{width: width}}>{val}</td>);
 
 	let rows = [];
 	for (let row of results) {
 		let columnData = [];
 
-		for (let key of columns) columnData.push(<td style={{"font-weight": "normal"}}>{row[key]}</td>);
-
+		for (let key of columns) columnData.push(<td>{row[key]}</td>);
 		rows.push(<tr>{columnData}</tr>);
 	}
 	
@@ -106,16 +113,8 @@ function SqlEditor() {
 			setResult("");
 		});
 	}
-	function loadFirstQuestion() {
-		loadQuestion(1);
-	}
-	function loadNextQuestion() {
-		loadQuestion(question.id + 1);
-	}
 
 	function submitQuery() {
-		//let query = document.querySelector('#editor textarea').value;
-
 		if (query.length === 0) {
 			const result = {
 				success: false,
@@ -143,7 +142,6 @@ function SqlEditor() {
 				<div>
 					<Suspense fallback={<Loader />}>
 						<Question
-							query={query}
 							question={question}
 							setQuestion={setQuestion}
 							history={history}
@@ -178,7 +176,7 @@ function SqlEditor() {
 								</button>
 
 								{ result !== null && result.success
-									? 	<button className='secondary-btn' onClick={loadNextQuestion}>
+									? 	<button className='secondary-btn' onClick={() => loadQuestion(question.id + 1)}>
 											Next question
 										</button>
 									: 	<button className='secondary-btn' disabled>
@@ -189,7 +187,6 @@ function SqlEditor() {
 							</>
 						}
 
-						{/* {query ? <TableContainer query={query} /> : <Placeholder />} */}
 						<table style={{width: "100%"}}>
 							<thead>
 								<tr>
@@ -199,8 +196,8 @@ function SqlEditor() {
 							</thead>
 							<tbody>
 								<tr>
-									<td style={{"border-right": "1px solid black"}}>{formatQueryResults(expectedResult)}</td>
-									<td>{formatQueryResults(actualResult)}</td>
+									<td style={{"border-right": "1px solid black"}}><ResultTable results={expectedResult}/></td>
+									<td><ResultTable results={actualResult}/></td>
 								</tr>
 							</tbody>
 						</table>
