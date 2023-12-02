@@ -12,7 +12,7 @@ import DataTable from 'react-data-table-component';
 
 import './CSS/SqlEditor.css';
 
-function Question({ question, setQuestion, history, setHistory, setExpectedResult, setActualResult, result, setResult }) {
+function Question({ question, setQuestion, setHistory, setExpectedResult, setActualResult, result, setResult }) {
 	
 	
 
@@ -111,6 +111,14 @@ function SqlEditor() {
 		});
 	}
 
+	const clearHistory = () => {
+		sendPostRequest(`${API_HOSTNAME}/clearhistory`, { question: question.id }, data => {
+			setHistory([]);
+		});
+	};
+
+	const loadNextQuestion = () => loadQuestion(question.id + 1);
+
 	return (
 		<>
 			<div className='solid-background'></div>
@@ -121,7 +129,6 @@ function SqlEditor() {
 						<Question
 							question={question}
 							setQuestion={setQuestion}
-							history={history}
 							setHistory={setHistory}
 							setExpectedResult={setExpectedResult}
 							setActualResult={setActualResult}
@@ -133,32 +140,18 @@ function SqlEditor() {
 							value={query}
 							setValue={setQuery}
 							history={history}
-							setHistory={setHistory}
-							setExpectedResult={setExpectedResult}
-							setActualResult={setActualResult}
 						/>
 						
 						{ question !== null &&
 							<>
-							<button className='secondary-btn' onClick={() => {
-								sendPostRequest(`${API_HOSTNAME}/clearhistory`, { question: question.id }, data => {
-									setHistory([]);
-								});
-							}}>
-								Clear history
-							</button>
+							<button className='secondary-btn' onClick={clearHistory}>Clear history</button>
+							
 							<div style={{'float': 'right'}}>
-								<button className="primary-btn" onClick={submitQuery}>
-									Submit query
-								</button>
+								<button className="primary-btn" onClick={submitQuery}>Submit query</button>
 
 								{ result !== null && result.success
-									? 	<button className='secondary-btn' onClick={() => loadQuestion(question.id + 1)}>
-											Next question
-										</button>
-									: 	<button className='secondary-btn' disabled>
-											Next question
-										</button>
+									? <button className='secondary-btn' onClick={loadNextQuestion}>Next question</button>
+									: <button className='secondary-btn' disabled>Next question</button>
 								}
 							</div>
 							</>
