@@ -11,12 +11,20 @@ import { Container, Typography } from '@mui/material';
 import DataTable from 'react-data-table-component';
 
 import './CSS/SqlEditor.css';
+import { useParams } from 'react-router-dom';
+
+function getResultText(result) {
+	if (typeof result === 'string') return result;
+	if ('error' in result) return result.error;
+
+	return result.success
+		? "You answered correctly!"
+		: "Try again";
+}
 
 function Question({ question, setQuestion, setHistory, setExpectedResult, setActualResult, result, setResult }) {
-	
-	
 
-	function loadQuestion(id) {
+	const loadQuestion = (id) => {
 		sendGetRequest(`${API_HOSTNAME}/question?q=${id}`, data => {
 			setQuestion(data)
 			setHistory(data.history.toReversed());
@@ -30,25 +38,16 @@ function Question({ question, setQuestion, setHistory, setExpectedResult, setAct
 		loadQuestion(1);
 
 		return (
-			<Container
-				sx={{
-					textAlign: 'center',
-				}}>
+			<Container sx={{textAlign: 'center'}}>
 				<p>Loading...</p>
 			</Container>
 		);
 	} else {
 		return (
-			<Container
-				sx={{
-					textAlign: 'center',
-				}}>
-				<div style={{'fontSize': '1.25rem'}}>{question.question}</div>
+			<Container sx={{textAlign: 'center'}}>
+				<div style={{fontSize: '1.25rem'}}>{question.question}</div>
 
-				<Typography variant="body1">{
-					typeof result === 'string' ? result
-					: 'error' in result ? result.error : (result.success ? "You answered correctly!" : "Try again")
-				}</Typography>
+				<Typography variant="body1">{getResultText(result)}</Typography>
 			</Container>
 		);
 	}
@@ -67,10 +66,7 @@ function ResultTable({ results }) {
 		}
 	});
 
-	return <DataTable
-		columns={columns}
-		data={results}
-	/>;
+	return <DataTable columns={columns} data={results}/>;
 }
 
 function SqlEditor() {
@@ -80,8 +76,9 @@ function SqlEditor() {
 	const [expectedResult, setExpectedResult] = useState([]);
 	const [actualResult, setActualResult] = useState([]);
 	const [result, setResult] = React.useState('');
+	
 
-	function loadQuestion(id) {
+	const loadQuestion = (id) => {
 		sendGetRequest(`${API_HOSTNAME}/question?q=${id}`, data => {
 			setQuestion(data)
 			setHistory(data.history.toReversed());
@@ -91,7 +88,7 @@ function SqlEditor() {
 		});
 	}
 
-	function submitQuery() {
+	const submitQuery = () => {
 		if (query.length === 0) {
 			const result = {
 				success: false,
