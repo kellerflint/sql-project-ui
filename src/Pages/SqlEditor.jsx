@@ -11,7 +11,6 @@ import { Container, Typography } from '@mui/material';
 import DataTable from 'react-data-table-component';
 
 import './CSS/SqlEditor.css';
-import { useParams } from 'react-router-dom';
 
 function getResultText(result) {
 	if (typeof result === 'string') return result;
