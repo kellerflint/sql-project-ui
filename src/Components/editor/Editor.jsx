@@ -29,7 +29,7 @@ const HeroContainer = styled.div`
 	}
 `;
 
-const Editor = ({ value, setValue, history, setHistory, setExpectedResult, setActualResult }) => {
+const Editor = ({ value, setValue, history}) => {
 	const onChange = (newValue) => {
 		setValue(newValue);
 	};
