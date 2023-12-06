@@ -31,7 +31,7 @@ const Header = () => {
           
           <div className='start'>
             <Link to='/login'>
-              SIGN UP
+              SIGN IN
             </Link>
           </div>
           <button className='toggle' onClick={() => setClick(!click)}>

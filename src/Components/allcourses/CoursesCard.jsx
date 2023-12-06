@@ -42,7 +42,7 @@ const CoursesCard = () => {
                   </div>
                 </div>
               </div>
-              <Link to='/assignment'>
+              <Link to='/login'>
                 <button className='outline-btn'>START NOW !</button>
               </Link>
             </div>

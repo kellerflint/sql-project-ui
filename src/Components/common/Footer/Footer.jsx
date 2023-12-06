@@ -1,5 +1,6 @@
 import React from "react"
 import "./Footer.css"
+import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
@@ -9,7 +10,8 @@ const Footer = () => {
           <div className='box logo'>
             <h1>SQLEA</h1>
             <span>ONLINE EDUCATION & LEARNING</span>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+            <p>The software is designed to enhance the learning experience for students enrolled in our SQL classes. By utilizing this application, 
+              students gain access to a practical platform where they can create, execute, and verify their SQL queries.</p>
 
             <i className='fab fa-facebook-f icon'></i>
             <i className='fab fa-twitter icon'></i>
@@ -18,18 +20,28 @@ const Footer = () => {
           <div className='box link'>
             <h3>Explore</h3>
             <ul>
-              <li>About Us</li>
-              <li>Courses</li>
-              <li>Contact us</li>
+              <li>
+              <Link to='/about'>About us</Link>
+                </li>
+              <li>
+              <Link to='/courses'>Courses</Link>
+                </li>
+              <li>
+              <Link to='/contact'>Contact us</Link>
+                </li>
             </ul>
           </div>
           <div className='box link'>
             <h3>Quick Links</h3>
             <ul>
-              <li>Contact Us</li>
+              <li>
+              <Link to='/contact'>Contact Us</Link>
+                </li>
               <li>Terms & Conditions</li>
               <li>Privacy</li>
-              <li>Feedbacks</li>
+              <li>
+              <Link to='/contact'>Feedbacks</Link>
+                </li>
             </ul>
           </div>
           <div className='box'>
