@@ -2,14 +2,13 @@ import React from "react"
 import Heading from "../common/heading/Heading"
 import "../allcourses/courses.css"
 import { coursesCard } from "../../dummydata"
-import { Link } from "react-router-dom"
 
 const HAbout = () => {
   return (
     <>
       <section className='homeAbout'>
         <div className='container'>
-          <Heading subtitle='our courses' title='explore our SQL online courses' />
+          <Heading subtitle='our courses' title='explore our popular online courses' />
 
           <div className='coursesCard'>
             {/* copy code form  coursesCard */}
@@ -48,9 +47,7 @@ const HAbout = () => {
                       </div>
                     </div>
                   </div>
-                  <Link to='/login'>
-                  <button className='outline-btn'>START NOW !</button>
-                  </Link>
+                  <button className='outline-btn'>ENROLL NOW !</button>
                 </div>
               ))}
             </div>
