@@ -1,0 +1,22 @@
+.results-table {
+    padding: 4px 48px;   
+}
+
+.rdt_TableHeadRow {
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: #1eb2a6 !important;
+    color: white;
+}
+
+.rdt_TableCell, .rdt_TableHeadRow {
+    font-size: 1rem;
+}
+
+.results-table tbody tr:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.results-table td {
+    padding: 0 8px;
+}
