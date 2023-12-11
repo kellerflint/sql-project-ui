@@ -1,3 +1,9 @@
+# README
+
+## Using this project
+
+This project is intended to be used in conjunction with the [API project](https://github.com/kellerflint/sql-project-api/). Several features will not function unless you are running the API at the same time as this project.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
