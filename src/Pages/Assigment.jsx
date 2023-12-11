@@ -6,6 +6,8 @@ import Back from "../Components/common/back/Back";
 
 import { API_HOSTNAME } from "../Hooks/useApiRequest";
 import { Link } from "react-router-dom";
+import { SignedIn } from "@clerk/clerk-react";
+import { SignedOut } from "@clerk/clerk-react";
 
 const AssignmentList = ({ items }) => {
   return <>
@@ -26,6 +28,11 @@ function formatDate(sqlDate) {
 }
 
 const Assignment = () => {
+
+  if (!signedIn) {
+    
+  }
+  
   const [assignments, setAssignments] = useState(null);
   const [currentAssignment, setCurrentAssignment] = useState(null);
 
@@ -54,12 +61,17 @@ const Assignment = () => {
 
     return (
       <>
+        <SignedIn>
         <Back title="Assignments" />
         <div className="assignment_container">
           <h2>Class: SDEV 201</h2>
           <h3>Assignments</h3>
           <AssignmentList items={items}/>
         </div>
+        </SignedIn>
+        <SignedOut>
+          <p>redirect</p>
+        </SignedOut>
       </>
     );
   } else {

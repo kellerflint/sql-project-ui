@@ -3,8 +3,18 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ClerkProvider, RedirectToSignIn, SignIn, SignUp, SignedIn, SignedOut } from "@clerk/clerk-react";
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, redirect } from 'react-router-dom';
 import ProtectedPage from './ProtectedPage';
+
+import About from "./Components/About/About"
+import CourseHome from "./Components/allcourses/CourseHome"
+import Assignment from './Pages/Assigment';
+import LoginSignup from './Pages/LoginSignup';
+import SqlEditor from './Pages/SqlEditor';
+import Contact from "./Components/common/contact/Contact"
+import Header from "./Components/common/Header/Header"
+import Footer from "./Components/common/Footer/Footer"
+import Home from "./Components/Home/Home"
  
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
@@ -21,8 +31,17 @@ const ClerkWithRoutes = () => {
     publishableKey={clerkPubKey}
       navigate={(to) => naviagte(to)}
       >
+        <Header />
         <Routes>
-        <Route path="/" element={<App />} />
+
+        <Route exact path='/' element={<Home/>} />
+        <Route exact path='/about' element={<About/>} />
+        <Route exact path='/courses' element={<CourseHome/>} />
+        <Route exact path='/sql-editor' element={<SqlEditor/>} />
+        <Route exact path='/assignment' element={<Assignment/>} />
+        <Route exact path='/login' element={<LoginSignup/>} />
+        <Route exact path='/contact' element={<Contact/>} />
+
         <Route
           path="/sign-in/*"
           element={<SignIn redirectUrl={'/protected'} routing="path" path="/sign-in" />}

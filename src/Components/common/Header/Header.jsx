@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import Head from "./Head"
 import "./Header.css"
+import { UserButton } from "@clerk/clerk-react"
 
 const Header = () => {
   const [click, setClick] = useState(false)
@@ -10,6 +11,7 @@ const Header = () => {
     <>
       <Head />
       <header>
+      <UserButton />
         <nav className='flexSB'>
           <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
             <li>
