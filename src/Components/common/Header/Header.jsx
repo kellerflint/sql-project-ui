@@ -32,7 +32,7 @@ const Header = () => {
           </ul>
           
           <div className='start'>
-            <Link to='/login'>
+            <Link to='/sign-in'>
               SIGN IN
             </Link>
           </div>

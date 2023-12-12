@@ -16,7 +16,7 @@ const Hero = () => {
               This approach aims to facilitate improved understanding and long-term retention of SQL concepts among students.</p>
             <div className='button'>
               <button className='primary-btn'>
-              <Link to='/login'></Link>GET STARTED NOW <i className='fa fa-long-arrow-alt-right'></i>
+              <Link to='/sign-in'></Link>GET STARTED NOW <i className='fa fa-long-arrow-alt-right'></i>
               </button>
               <button>
               <Link to='/courses'></Link>VIEW COURSES <i className='fa fa-long-arrow-alt-right'></i>

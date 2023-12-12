@@ -44,11 +44,11 @@ const ClerkWithRoutes = () => {
 
         <Route
           path="/sign-in/*"
-          element={<SignIn redirectUrl={'/protected'} routing="path" path="/sign-in" />}
+          element={<SignIn redirectUrl={'/'} routing="path" path="/sign-in" />}
         />
         <Route
           path="/sign-up/*"
-          element={<SignUp redirectUrl={'/protected'} routing="path" path="/sign-up" />}
+          element={<SignUp redirectUrl={'/'} routing="path" path="/sign-up" />}
         />
          <Route
           path="/protected"
